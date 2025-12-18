@@ -1,6 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import * as React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  type StyleProp,
+  type ViewProps,
+  type ViewStyle,
+} from 'react-native';
 
+// Keep the public surface area similar to `react-native-maps` so existing imports keep working.
 export type Region = {
   latitude: number;
   longitude: number;
@@ -8,20 +16,27 @@ export type Region = {
   longitudeDelta: number;
 };
 
-type MapViewProps = {
+type MapViewProps = ViewProps & {
   style?: StyleProp<ViewStyle>;
-  region: Region;
+  region?: Region;
+  initialRegion?: Region;
   showsUserLocation?: boolean;
   children?: React.ReactNode;
 };
 
-export default function MapView({ style, region, children }: MapViewProps) {
+export default function MapView({ style, region, initialRegion, children, ...rest }: MapViewProps) {
+  const center = region ?? initialRegion;
+
   return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.title}>Map preview is not available on web.</Text>
-      <Text style={styles.subtitle}>
-        Center: {region.latitude.toFixed(5)}, {region.longitude.toFixed(5)}
-      </Text>
+    <View style={[styles.container, style]} {...rest}>
+      <Text style={styles.title}>Map is not available in the web build yet.</Text>
+      {center ? (
+        <Text style={styles.subtitle}>
+          Center: {center.latitude.toFixed(5)}, {center.longitude.toFixed(5)}
+        </Text>
+      ) : (
+        <Text style={styles.subtitle}>Open via Expo Go (native) to see the interactive map.</Text>
+      )}
       {children}
     </View>
   );
