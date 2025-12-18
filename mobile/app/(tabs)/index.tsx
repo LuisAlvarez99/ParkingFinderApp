@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
-import MapView, { Marker, type Region } from 'react-native-maps';
 
 import * as Location from 'expo-location';
+
+import MapView, { Marker, type Region } from '@/components/map-view';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';

@@ -1,0 +1,12 @@
+**/node_modules
+**/.expo
+**/.expo-shared
+**/.cache
+**/dist
+**/web-build
+**/.next
+**/.turbo
+**/.DS_Store
+.git
+.github
+README.md
