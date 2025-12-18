@@ -1,0 +1,17 @@
+services:
+  web:
+    image: parkingfinderapp:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    develop:
+      watch:
+        - action: sync
+          path: ./mobile
+          target: src/mobile
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: /mobile/package.json
